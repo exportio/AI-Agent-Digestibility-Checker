@@ -1,7 +1,9 @@
+
 import React from 'react';
 import { Hero } from './components/Hero';
 import { BenefitGrid } from './components/BenefitGrid';
 import { Waitlist } from './components/Waitlist';
+import { ReportPreview } from './components/ReportPreview';
 import { Layout } from 'lucide-react';
 
 const App: React.FC = () => {
@@ -19,7 +21,7 @@ const App: React.FC = () => {
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
             <a href="#features" className="hover:text-gray-900 transition-colors">How it works</a>
-            <a href="#pricing" className="hover:text-gray-900 transition-colors">Pricing</a>
+            <a href="#demo" className="hover:text-gray-900 transition-colors">Demo</a>
             <a href="#join" className="px-5 py-2.5 bg-white text-gray-900 rounded-full shadow-sm hover:shadow-md transition-all font-semibold">
               Get Early Access
             </a>
@@ -35,6 +37,9 @@ const App: React.FC = () => {
         <div id="features" className="bg-white/50 backdrop-blur-sm rounded-t-[3rem] -mt-10 pt-10 border-t border-white/40">
            <BenefitGrid />
         </div>
+
+        {/* Report Preview / Demo */}
+        <ReportPreview />
 
         {/* Waitlist Section */}
         <div className="bg-white">
