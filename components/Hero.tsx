@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Card } from './Card';
-import { Bot, Search, FileText, Check, AlertCircle } from 'lucide-react';
+import { Bot, Search, FileText, Check, ArrowRight } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const [scanStep, setScanStep] = useState(0);
@@ -20,38 +20,39 @@ export const Hero: React.FC = () => {
   ];
 
   return (
-    <div className="relative pt-32 pb-20 px-4 overflow-hidden">
+    <div className="relative pt-32 pb-10 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
         
         {/* Text Content */}
         <div className="text-center lg:text-left">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-sm mb-8 animate-fade-in-up">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            <span className="text-sm font-medium text-gray-600">Now compatible with Gemini 2.5 Flash</span>
+            <span className="text-sm font-medium text-gray-600">Free Live Analyzer</span>
           </div>
           
           <h1 className="text-5xl lg:text-7xl font-display font-bold text-gray-900 leading-[1.1] tracking-tight mb-8">
-            Make your website <br/>
+            Is your website <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-800">
-              digestible by AI.
+              agent ready?
             </span>
           </h1>
           
           <p className="text-xl text-gray-700 mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-            The web is changing. AI agents are the new power users. 
-            <strong> AgentReady</strong> analyzes your site's structure to ensure LLMs can read, understand, and reference your content accurately.
+            AI agents are the new power users. 
+            <strong> AgentReady</strong> scans your site's structure to verify if LLMs can read, understand, and reference your content accurately.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <a 
-              href="#join"
-              className="px-8 py-4 bg-gray-900 text-white font-semibold rounded-2xl hover:bg-gray-800 hover:scale-105 transition-all duration-300 shadow-lg shadow-gray-900/10 text-lg"
+            <button 
+              onClick={() => document.getElementById('analyzer')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-4 bg-gray-900 text-white font-semibold rounded-2xl hover:bg-gray-800 hover:scale-105 transition-all duration-300 shadow-lg shadow-gray-900/10 text-lg flex items-center justify-center gap-2 group"
             >
-              Analyze my URL
-            </a>
-            <button className="px-8 py-4 bg-white text-gray-900 font-semibold rounded-2xl hover:bg-gray-50 border border-white hover:border-gray-200 transition-all duration-300 shadow-sm text-lg">
-              View Sample Report
+              Start Free Scan
+              <ArrowRight className="group-hover:translate-x-1 transition-transform" />
             </button>
+            <a href="#features" className="px-8 py-4 bg-white text-gray-900 font-semibold rounded-2xl hover:bg-gray-50 border border-white hover:border-gray-200 transition-all duration-300 shadow-sm text-lg flex items-center justify-center">
+              Learn More
+            </a>
           </div>
         </div>
 

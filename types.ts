@@ -12,3 +12,21 @@ export interface Testimonial {
   avatar: string;
   content: string;
 }
+
+export interface Finding {
+  category: string;
+  status: 'pass' | 'fail' | 'warning';
+  message: string;
+  details?: string;
+}
+
+export interface AnalysisReport {
+  url: string;
+  score: number;
+  summary: string;
+  findings: Finding[];
+  structureScore: number;
+  metadataScore: number;
+  llmScore: number;
+  scannedAt: string;
+}
