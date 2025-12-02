@@ -42,18 +42,6 @@ export const Hero: React.FC = () => {
             <strong> AgentReady</strong> scans your site's structure to verify if LLMs can read, understand, and reference your content accurately.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <button 
-              onClick={() => document.getElementById('analyzer')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-gray-900 text-white font-semibold rounded-2xl hover:bg-gray-800 hover:scale-105 transition-all duration-300 shadow-lg shadow-gray-900/10 text-lg flex items-center justify-center gap-2 group"
-            >
-              Start Free Scan
-              <ArrowRight className="group-hover:translate-x-1 transition-transform" />
-            </button>
-            <a href="#features" className="px-8 py-4 bg-white text-gray-900 font-semibold rounded-2xl hover:bg-gray-50 border border-white hover:border-gray-200 transition-all duration-300 shadow-sm text-lg flex items-center justify-center">
-              Learn More
-            </a>
-          </div>
         </div>
 
         {/* Visual Content - Mock Interface */}

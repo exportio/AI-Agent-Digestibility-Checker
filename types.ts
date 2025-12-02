@@ -27,6 +27,7 @@ export interface AnalysisReport {
   findings: Finding[];
   structureScore: number;
   metadataScore: number;
+  vagueDescriptionScore: number;
   llmScore: number;
   scannedAt: string;
 }

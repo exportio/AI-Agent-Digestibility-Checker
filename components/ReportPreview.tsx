@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { Card } from './Card';
-import { 
-  CheckCircle2, 
-  Code2, 
-  FileJson, 
-  Layout, 
+import {
+  CheckCircle2,
+  Code2,
+  FileJson,
+  Layout,
   Zap,
   Bot
 } from 'lucide-react';
@@ -49,25 +49,25 @@ export const ReportPreview: React.FC = () => {
           {/* Dashboard Area */}
           <div className="p-6 md:p-8 lg:p-10 bg-[#FAFAFA]">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-              
+
               {/* Sidebar: Score & Navigation */}
               <div className="lg:col-span-4 space-y-6">
                 <Card className="!p-8 flex flex-col items-center text-center bg-white border border-gray-100 shadow-sm relative overflow-hidden">
-                   <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-300 to-brand-500"></div>
-                   <h3 className="text-gray-500 text-sm font-bold tracking-widest uppercase mb-6">Readability Score</h3>
-                   <div className="relative mb-6">
-                     <svg className="w-40 h-40 transform -rotate-90">
-                       <circle cx="80" cy="80" r="70" stroke="#f3f4f6" strokeWidth="12" fill="none" />
-                       <circle cx="80" cy="80" r="70" stroke="#A3CC14" strokeWidth="12" fill="none" strokeDasharray="440" strokeDashoffset="44" strokeLinecap="round" />
-                     </svg>
-                     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-                       <span className="text-5xl font-display font-bold text-gray-900">92</span>
-                       <span className="block text-xs font-bold text-gray-400 mt-1">/ 100</span>
-                     </div>
-                   </div>
-                   <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-xs font-bold">
-                     <CheckCircle2 size={14} /> AI Optimized
-                   </div>
+                  <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-brand-300 to-brand-500"></div>
+                  <h3 className="text-gray-500 text-sm font-bold tracking-widest uppercase mb-6">Readability Score</h3>
+                  <div className="relative mb-6 w-40 h-40">
+                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 160 160">
+                      <circle cx="80" cy="80" r="70" stroke="#f3f4f6" strokeWidth="12" fill="none" />
+                      <circle cx="80" cy="80" r="70" stroke="#A3CC14" strokeWidth="12" fill="none" strokeDasharray="440" strokeDashoffset="44" strokeLinecap="round" />
+                    </svg>
+                    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+                      <span className="text-5xl font-display font-bold text-gray-900">92</span>
+                      <span className="block text-xs font-bold text-gray-400 mt-1">/ 100</span>
+                    </div>
+                  </div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-green-50 text-green-700 rounded-full text-xs font-bold">
+                    <CheckCircle2 size={14} /> AI Optimized
+                  </div>
                 </Card>
 
                 <div className="bg-white rounded-3xl border border-gray-100 shadow-sm overflow-hidden">
@@ -95,7 +95,7 @@ export const ReportPreview: React.FC = () => {
 
               {/* Main Content: Tabs/Details */}
               <div className="lg:col-span-8 space-y-6">
-                
+
                 {/* Section 1: Semantic Analysis */}
                 <Card className="!p-0 border border-gray-100 shadow-sm overflow-hidden">
                   <div className="px-6 py-5 border-b border-gray-100 flex items-center justify-between bg-white">
@@ -110,7 +110,7 @@ export const ReportPreview: React.FC = () => {
                     </div>
                     <span className="px-3 py-1 bg-green-50 text-green-600 text-xs font-bold rounded-full border border-green-100">Passed</span>
                   </div>
-                  
+
                   <div className="p-6 bg-gray-50/50">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       {/* Left: Visualization */}
@@ -122,7 +122,7 @@ export const ReportPreview: React.FC = () => {
                             <div className="h-px bg-gray-200 flex-1"></div>
                           </div>
                           <div className="pl-6 space-y-3 border-l-2 border-gray-100 ml-3">
-                             <div className="flex items-center gap-2">
+                            <div className="flex items-center gap-2">
                               <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-mono">&lt;h1&gt;</span>
                               <span className="text-xs text-gray-500 truncate">Understanding AI Agents</span>
                             </div>
@@ -132,7 +132,7 @@ export const ReportPreview: React.FC = () => {
                               <CheckCircle2 size={14} className="text-green-500" />
                             </div>
                             <div className="pl-6 border-l-2 border-gray-100 ml-3">
-                               <div className="flex items-center gap-2">
+                              <div className="flex items-center gap-2">
                                 <span className="px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs font-mono">&lt;h2&gt;</span>
                                 <span className="text-xs text-gray-500 truncate">Key Benefits</span>
                               </div>
@@ -140,23 +140,23 @@ export const ReportPreview: React.FC = () => {
                           </div>
                         </div>
                       </div>
-                      
+
                       {/* Right: Insights */}
                       <div className="space-y-3">
-                         <div className="p-4 bg-white rounded-xl border border-gray-200 shadow-sm flex gap-3">
-                           <div className="mt-0.5"><CheckCircle2 size={16} className="text-green-500" /></div>
-                           <div>
-                             <p className="text-sm font-bold text-gray-900">Proper Hierarchy</p>
-                             <p className="text-xs text-gray-500 mt-1">Headings follow a logical H1-H3 progression, allowing agents to map context correctly.</p>
-                           </div>
-                         </div>
-                         <div className="p-4 bg-white rounded-xl border border-gray-200 shadow-sm flex gap-3">
-                           <div className="mt-0.5"><CheckCircle2 size={16} className="text-green-500" /></div>
-                           <div>
-                             <p className="text-sm font-bold text-gray-900">Landmark Roles</p>
-                             <p className="text-xs text-gray-500 mt-1">Main, Nav, and Footer regions are explicitly defined.</p>
-                           </div>
-                         </div>
+                        <div className="p-4 bg-white rounded-xl border border-gray-200 shadow-sm flex gap-3">
+                          <div className="mt-0.5"><CheckCircle2 size={16} className="text-green-500" /></div>
+                          <div>
+                            <p className="text-sm font-bold text-gray-900">Proper Hierarchy</p>
+                            <p className="text-xs text-gray-500 mt-1">Headings follow a logical H1-H3 progression, allowing agents to map context correctly.</p>
+                          </div>
+                        </div>
+                        <div className="p-4 bg-white rounded-xl border border-gray-200 shadow-sm flex gap-3">
+                          <div className="mt-0.5"><CheckCircle2 size={16} className="text-green-500" /></div>
+                          <div>
+                            <p className="text-sm font-bold text-gray-900">Landmark Roles</p>
+                            <p className="text-xs text-gray-500 mt-1">Main, Nav, and Footer regions are explicitly defined.</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -176,7 +176,7 @@ export const ReportPreview: React.FC = () => {
                     </div>
                     <span className="px-3 py-1 bg-yellow-50 text-yellow-600 text-xs font-bold rounded-full border border-yellow-100">Warning</span>
                   </div>
-                  
+
                   <div className="p-6 bg-white">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between p-3 rounded-lg bg-gray-50 border border-gray-100">

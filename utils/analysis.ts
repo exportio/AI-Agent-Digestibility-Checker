@@ -12,7 +12,7 @@ export async function analyzeUrl(url: string): Promise<AnalysisReport> {
   if (!targetUrl.startsWith('http')) {
     targetUrl = 'https://' + targetUrl;
   }
-  
+
   try {
     new URL(targetUrl);
   } catch (e) {
@@ -37,12 +37,13 @@ export async function analyzeUrl(url: string): Promise<AnalysisReport> {
     if (!apiKey) {
       // Return a mock result if no API key is present (demo mode robustness)
       console.warn("No API_KEY found in process.env. Falling back to mock data for demo purposes.");
-       return {
+      return {
         url: targetUrl,
         score: 78,
         structureScore: 85,
         metadataScore: 60,
         llmScore: 90,
+        vagueDescriptionScore: 60,
         summary: "Demo Report: API Key missing. Ensure process.env.API_KEY is set. This site appears to have good semantic structure but may lack specific schema markup.",
         findings: [
           { category: "Structure", status: "pass", message: "Semantic tags detected", details: "The page uses <header> and <main> correctly." },
@@ -54,7 +55,7 @@ export async function analyzeUrl(url: string): Promise<AnalysisReport> {
     }
 
     const ai = new GoogleGenAI({ apiKey });
-    
+
     // Truncate HTML if too large to prevent token limits (naive truncation)
     const truncatedHtml = htmlContent.slice(0, 30000);
 
@@ -66,12 +67,14 @@ export async function analyzeUrl(url: string): Promise<AnalysisReport> {
       1. Semantic HTML (use of <main>, <article>, <nav>, headings hierarchy).
       2. Structured Data (Schema.org).
       3. Accessibility/Alt text (as a proxy for image understanding).
-      4. LLM optimization (clarity, robots.txt, llms.txt).
+      4. Vague description of services/products.
+      5. LLM optimization (clarity, robots.txt, llms.txt).
 
       Return a JSON object with:
       - score (0-100 integer)
       - structureScore (0-100 integer)
       - metadataScore (0-100 integer)
+      - vagueDescriptionScore (0-100 integer)
       - llmScore (0-100 integer)
       - summary (2 sentences max)
       - findings: Array of objects with { category: string, status: "pass"|"fail"|"warning", message: string, details: string }
@@ -91,6 +94,7 @@ export async function analyzeUrl(url: string): Promise<AnalysisReport> {
             score: { type: Type.INTEGER },
             structureScore: { type: Type.INTEGER },
             metadataScore: { type: Type.INTEGER },
+            vagueDescriptionScore: { type: Type.INTEGER },
             llmScore: { type: Type.INTEGER },
             summary: { type: Type.STRING },
             findings: {
@@ -122,6 +126,7 @@ export async function analyzeUrl(url: string): Promise<AnalysisReport> {
       structureScore: result.structureScore || 0,
       metadataScore: result.metadataScore || 0,
       llmScore: result.llmScore || 0,
+      vagueDescriptionScore: result.vagueDescriptionScore || 0,
       summary: result.summary || "Analysis complete.",
       findings: result.findings || [],
       scannedAt: new Date().toISOString()
