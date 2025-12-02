@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card } from './Card';
-import { analyzeUrl } from '../utils/analysis';
+import { analyzeUrl, generateLlmsTxt } from '../utils/analysis';
 import { AnalysisReport, Finding } from '../types';
 import {
   Search,
@@ -23,6 +23,26 @@ export const Analyzer: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [report, setReport] = useState<AnalysisReport | null>(null);
   const [expandedFinding, setExpandedFinding] = useState<number | null>(null);
+  const [llmsTxtResult, setLlmsTxtResult] = useState<string | null>(null);
+  const [generatingLlmsTxt, setGeneratingLlmsTxt] = useState(false);
+
+  const handleGenerateLlmsTxt = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!url) return;
+
+    setGeneratingLlmsTxt(true);
+    setError(null);
+    setLlmsTxtResult(null);
+
+    try {
+      const result = await generateLlmsTxt(url);
+      setLlmsTxtResult(result);
+    } catch (err: any) {
+      setError(err.message || "Failed to generate LLMS.TXT");
+    } finally {
+      setGeneratingLlmsTxt(false);
+    }
+  };
 
   const handleAnalyze = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,8 +81,8 @@ export const Analyzer: React.FC = () => {
   return (
     <section id="analyzer" className="py-20 px-4 relative overflow-hidden">
       {/* Search Input Section */}
-      <div className="max-w-4xl mx-auto text-center mb-16 relative z-10">
-        <div className="bg-white p-2 rounded-2xl shadow-xl border border-gray-100 max-w-2xl mx-auto flex flex-col sm:flex-row gap-2">
+      <div className="max-w-5xl mx-auto text-center mb-16 relative z-10">
+        <div className="bg-white p-2 rounded-2xl shadow-xl border border-gray-100 max-w-5xl mx-auto flex flex-col sm:flex-row gap-2">
           <div className="flex-1 relative">
             <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
               <Search size={20} />
@@ -78,10 +98,17 @@ export const Analyzer: React.FC = () => {
           </div>
           <button
             onClick={handleAnalyze}
-            disabled={loading}
+            disabled={loading || generatingLlmsTxt}
             className="h-14 px-8 bg-brand-400 hover:bg-brand-300 text-brand-900 font-bold rounded-xl transition-all flex items-center justify-center gap-2 whitespace-nowrap disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {loading ? <Loader2 className="animate-spin" /> : 'Analyze my Website FREE'}
+          </button>
+          <button
+            onClick={handleGenerateLlmsTxt}
+            disabled={generatingLlmsTxt || loading}
+            className="h-14 px-8 bg-gray-900 hover:bg-gray-800 text-white font-bold rounded-xl transition-all flex items-center justify-center gap-2 whitespace-nowrap disabled:opacity-70 disabled:cursor-not-allowed"
+          >
+            {generatingLlmsTxt ? <Loader2 className="animate-spin" /> : 'Generate LLMS.TXT'}
           </button>
         </div>
         {error && (
@@ -91,6 +118,29 @@ export const Analyzer: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* LLMS.TXT Result */}
+      {llmsTxtResult && (
+        <div className="max-w-4xl mx-auto text-left mb-16 animate-fade-in-up relative z-10">
+          <div className="bg-white p-6 rounded-2xl shadow-xl border border-gray-100">
+            <div className="flex justify-between items-center mb-4">
+              <h3 className="font-bold text-gray-900 flex items-center gap-2">
+                <FileJson size={20} className="text-brand-600" />
+                Generated LLMS.TXT
+              </h3>
+              <button
+                onClick={() => { navigator.clipboard.writeText(llmsTxtResult) }}
+                className="text-sm text-brand-600 font-medium hover:text-brand-700 bg-brand-50 px-3 py-1.5 rounded-lg transition-colors"
+              >
+                Copy to Clipboard
+              </button>
+            </div>
+            <pre className="bg-gray-900 text-gray-100 p-4 rounded-xl overflow-x-auto text-sm font-mono whitespace-pre-wrap max-h-[500px] overflow-y-auto">
+              {llmsTxtResult}
+            </pre>
+          </div>
+        </div>
+      )}
 
       {/* Report Results */}
       {report && (
