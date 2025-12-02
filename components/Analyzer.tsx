@@ -25,6 +25,15 @@ export const Analyzer: React.FC = () => {
   const [expandedFinding, setExpandedFinding] = useState<number | null>(null);
   const [llmsTxtResult, setLlmsTxtResult] = useState<string | null>(null);
   const [generatingLlmsTxt, setGeneratingLlmsTxt] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = () => {
+    if (llmsTxtResult) {
+      navigator.clipboard.writeText(llmsTxtResult);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
 
   const handleGenerateLlmsTxt = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -129,10 +138,20 @@ export const Analyzer: React.FC = () => {
                 Generated LLMS.TXT
               </h3>
               <button
-                onClick={() => { navigator.clipboard.writeText(llmsTxtResult) }}
-                className="text-sm text-brand-600 font-medium hover:text-brand-700 bg-brand-50 px-3 py-1.5 rounded-lg transition-colors"
+                onClick={handleCopy}
+                className={`text-sm font-medium px-3 py-1.5 rounded-lg transition-all flex items-center gap-2 ${copied
+                    ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                    : 'text-brand-600 hover:text-brand-700 bg-brand-50 hover:bg-brand-100'
+                  }`}
               >
-                Copy to Clipboard
+                {copied ? (
+                  <>
+                    <CheckCircle2 size={16} />
+                    Copied!
+                  </>
+                ) : (
+                  'Copy to Clipboard'
+                )}
               </button>
             </div>
             <pre className="bg-gray-900 text-gray-100 p-4 rounded-xl overflow-x-auto text-sm font-mono whitespace-pre-wrap max-h-[500px] overflow-y-auto">
